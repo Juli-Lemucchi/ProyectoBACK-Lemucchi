@@ -1,3 +1,4 @@
+//!IGNORAR tema de clases anteriores a modo de repaso de los ejercicios
 /*import { Router, response } from "express";
 
 const user = [

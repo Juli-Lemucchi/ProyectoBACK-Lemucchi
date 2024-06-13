@@ -1,26 +1,26 @@
 import {promise as fs} from 'fs';
 
-class ProductM {
+class BooksM {
     static ultId =0;
 
     constructor(path){
-        this.products = [];
+        this.books = [];
         this.path = path;
     }
 
     async addProduct ({title, price, description, img, code, stock, category}){
         try{
-            const arrayProductos =await this.leerArchivo();
+            const arrayBooks =await this.leerArchivo();
             if(!title || !price || !description || !img || !code || !stock || !category){
                 console.log("Todos los campos son obligatorios");
                 return;
             }
-            if(arrayProductos.some(i=>i.code===code)){
-                console.log("El producto ya existe");
+            if(arrayBooks.some(i=>i.code===code)){
+                console.log("YA TENEMOS ESE LIBRO, NO PODEMOS AGREGARLO NUEVAMENTE");
                 return;
             }
 
-            const newProduct = {
+            const newBooks = {
                 title,
                 price,
                 description,
@@ -30,13 +30,13 @@ class ProductM {
                 category,
                 status : true,
             };
-            if (arrayProductos.length > 0) {
-                ProductM.ultId= arrayProductos.reduce((maxId,product)=>Math.max)
+            if (arrayBooks.length > 0) {
+                BooksM.ultId= arrayBooks.reduce((maxId,book)=>Math.max)
             }
-            newProduct.id=++ProductM.ultId;
+            newBooks.id=++BooksM.ultId;
 
-            arrayProductos.push(newProduct);
-            await this.guardarArchivo(arrayProductos);
+            arrayBooks.push(newBooks);
+            await this.guardarArchivo(arrayBooks);
         }
         catch(error){
             console.log("ERROR AL AGREGAR PRODUCTO");
@@ -45,8 +45,8 @@ class ProductM {
     }
     async getProducts(){
         try{
-            const arrayProductos =await this.leerArchivo();
-            return arrayProductos;
+            const arrayBooks =await this.leerArchivo();
+            return arrayBooks;
         }
         catch(error){
             console.log("ERROR AL LEER ARCHIVO");
@@ -56,8 +56,8 @@ class ProductM {
     
     async getProductById(id){
         try{
-            const arrayProductos =await this.leerArchivo();
-            const buscado = arrayProductos.find(i=>i.id===id);
+            const arrayBooks =await this.leerArchivo();
+            const buscado = arrayBooks.find(i=>i.id===id);
 
             if(!buscado){
                 console.log("PRODUCTO NO ENCONTRADO");
@@ -75,8 +75,8 @@ class ProductM {
     async leerArchivo(){
         try{
             const respuesta = await fs.readFile(this.path, 'utf-8');
-            const arrayProductos = JSON.parse(respuesta);
-            return arrayProductos;
+            const arrayBooks = JSON.parse(respuesta);
+            return arrayBooks;
         }
         catch(error){
             console.log("ERROR AL LEER ARCHIVO",error);
@@ -84,23 +84,23 @@ class ProductM {
         }
     }
 
-    async guardarArchivo(arrayProductos){
+    async guardarArchivo(arrayBooks){
         try{
-            await fs.writeFile(this.path,JSON.stringify(arrayProductos,null,2));
+            await fs.writeFile(this.path,JSON.stringify(arrayBooks,null,2));
         }
         catch(error){
             console.log("ERROR AL GUARDAR ARCHIVO",error);
             throw error;
         }
     }
-    async updateProduct(id, productoActualizado){
+    async updateProduct(id, bookActualizado){
         try{
-            const arrayProductos =await this.leerArchivo();
-            const index = arrayProductos.findIndex(i=>i.id===id);
+            const arrayBooks =await this.leerArchivo();
+            const index = arrayBooks.findIndex(i=>i.id===id);
 
             if(index===-1){
-                arrayProductos[index]={...arrayProductos[index],...productoActualizado};
-                await this.guardarArchivo(arrayProductos);
+                arrayBooks[index]={...arrayBooks[index],...bookActualizado};
+                await this.guardarArchivo(arrayBooks);
                 console.log("PRODUCTO ACTUALIZADO");
             }else{
                 console.log("PRODUCTO NO ENCONTRADO");
@@ -112,11 +112,11 @@ class ProductM {
     }
     async deleteProduct(id){
         try{
-            const arrayProductos =await this.leerArchivo();
-            const index = arrayProductos.findIndex(i=>i.id===id);
+            const arrayBooks =await this.leerArchivo();
+            const index = arrayBooks.findIndex(i=>i.id===id);
             if(index===-1){
-                arrayProductos.splice(index,1);
-                await this.guardarArchivo(arrayProductos);
+                arrayBooks.splice(index,1);
+                await this.guardarArchivo(arrayBooks);
                 console.log("PRODUCTO ELIMINADO");
             }else{
                 console.log("PRODUCTO NO ENCONTRADO");
@@ -127,4 +127,4 @@ class ProductM {
         }
     }
 }
-export default ProductM;
+export default BooksM;

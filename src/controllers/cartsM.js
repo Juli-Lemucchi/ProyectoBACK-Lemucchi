@@ -27,7 +27,7 @@ class CartsM{
     async createCart(){
         const nuevoCarrito={
             id: ++this.ultId,
-            products: [],
+            books: [],
         };
         this.carts.push(nuevoCarrito);
         await this.guardarCarritos();
@@ -47,14 +47,14 @@ class CartsM{
         }            
     }
 
-    async addProducCarrito(cartId, productId, quantity=1){
+    async addProducCarrito(cartId, bookId, quantity=1){
         const carrito = await this.getCartById(cartId);
-        const ProducEncontrado = carrito.products.find(i=>i.product===productId);
+        const BookEncontrado = carrito.books.find(i=>i.book===bookId);
 
-        if(ProducEncontrado){
-            ProducEncontrado.quantity+=quantity;
+        if(BookEncontrado){
+            BookEncontrado.quantity+=quantity;
         }else{
-            carrito.products.push({product: productId, quantity});
+            carrito.books.push({book: bookId, quantity});
         }
 
         await this.guardarCarritos();
