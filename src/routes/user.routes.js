@@ -1,4 +1,4 @@
-import { Router, response } from "express";
+/*import { Router, response } from "express";
 
 const user = [
     {
@@ -103,4 +103,4 @@ router.get("*" , (req, res) => {
 });
 
 
-export default router
+export default router*/

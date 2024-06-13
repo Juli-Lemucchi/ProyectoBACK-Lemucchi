@@ -1,5 +1,25 @@
 import express from "express";
 import displayRoutes from "express-routemap";
+import productRoutes from "./routes/product.routes.js";
+import cartRoutes from "./routes/cart.routes.js";
+const app = express();
+const PUERTO = 8080;
+
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
+app.use("api/products", productRoutes);
+app.use("api/carts", cartRoutes);
+
+app.listen(PUERTO, () =>{
+    displayRoutes(app)
+    console.log("Server running on port: " + PUERTO)
+});
+
+
+
+/*import express from "express";
+import displayRoutes from "express-routemap";
 import usersRoutes from "./routes/user.routes.js";
 
 const app = express();
@@ -17,6 +37,6 @@ app.get("/", (req, res) => {
 app.listen(PUERTO, () =>{
     displayRoutes(app)
     console.log("Server running on port: " + PUERTO)
-})
+})*()*/
 
 
