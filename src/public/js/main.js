@@ -7,6 +7,7 @@ socket.on("books", (data)=>{
 
 const renderProducts = () =>{
     const contenedorBooks = document.getElementById("contenedorBooks");
+    contenedorBooks.innerHTML = "";
 
     data.forEach(item=>{
        const card = document.createElement("div");
@@ -30,4 +31,23 @@ const renderProducts = () =>{
 
 const eliminarProducts = (id)=>{
     socket.emit("eliminarProduct", id);
+}
+
+document.getElementById("btnEnviar").addEventListener("click", ()=>{
+    agregarProduct();
+})
+
+const agregarProduct = ()=>{
+    const product ={
+        title: document.getElementById("title").value,
+        price: document.getElementById("price").value,
+        description: document.getElementById("description").value,
+        category: document.getElementById("category").value,
+        ima: document.getElementById("ima").value,
+        code: document.getElementById("code").value,
+        stock: document.getElementById("stock").value,
+        status: document.getElementById("status").value === "true",
+    }
+
+    socket.emit("agregarProduct", product);
 }

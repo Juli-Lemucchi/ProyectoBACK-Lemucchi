@@ -28,17 +28,21 @@ const httpServer = app.listen(PUERTO, () =>{
 });
 
 import BooksM from "./controllers/booksM.js";
-const booksM = new BooksM("./src/modules/books.json");
+const booksMa = new BooksM("./src/modules/books.json");
 
 const io = new Server(httpServer);
 
 io.on("connection", async (socket) => {
     console.log("User conected")
 
-    socket.emit("books", await booksM.getProducts());
+    socket.emit("books", await booksMa.getProducts());
 
     socket.on("eliminarProduct", async (id) => {
-        await booksM.deleteProduct(id);
+        await booksMa.deleteProduct(id);
+        io.socket.emit("products",await booksM.getProducts());
+    })
+    socket.on("agregarProduct", async (product) => {
+        await booksMa.addProduct(product);
         io.socket.emit("products",await booksM.getProducts());
     })
 })

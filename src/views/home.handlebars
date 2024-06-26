@@ -1,0 +1,13 @@
+<h1>DinoBooks</h1>
+<h2>Nuestros libros disponibles</h2>
+
+<div class="contenedorBooks">
+    {{#each books}}
+    <div>
+        <h4>{{this.title}}</h4>
+        <p>{{this.description}}</p>
+        <p>{{this.price}}</p>
+        <p>{{this.category}}</p>
+
+    </div>
+</div>
