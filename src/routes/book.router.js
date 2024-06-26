@@ -3,7 +3,7 @@ import BooksM from "../controllers/booksM.js";
 
 
 const router = express.Router();
-const booksMa = new BooksM("./src/models/books.json");
+const booksMa = new BooksM("./src/modules/books.json");
 
 
 router.get("/", async (req, res) => {

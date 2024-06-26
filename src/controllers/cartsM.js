@@ -4,8 +4,8 @@ class CartsM{
     constructor(path){
         this.ultId = 0;
         this.path = path;
-        this.carts = [];
-        this.cargaCarritos();
+        this.carts = this.cargaCarritos();
+        
     }
 
     async cargaCarritos(){
@@ -21,7 +21,7 @@ class CartsM{
     }
 
     async guardarCarritos(){
-        await fs.wrteFile(this.path, json.stringify(this.carritos, null, 2));
+        await fs.writeFile(this.path, JSON.stringify(this.carritos, null, 2));
     }
 
     async createCart(){

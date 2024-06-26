@@ -2,7 +2,7 @@ import express from "express";
 import CartsM from "../controllers/cartsM.js";
 
 const router = express.Router();
-const cartsMa = new CartsM("./src/models/carts.json");
+const cartsMa = new CartsM("./src/modules/carts.json");
 
 router.post("/", async (req, res) => {
     try {

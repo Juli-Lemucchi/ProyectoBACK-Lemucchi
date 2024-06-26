@@ -1,4 +1,4 @@
-import {promise as fs} from 'fs';
+import {promises as fs} from 'fs';
 
 class BooksM {
     static ultId =0;
@@ -98,7 +98,7 @@ class BooksM {
             const arrayBooks =await this.leerArchivo();
             const index = arrayBooks.findIndex(i=>i.id===id);
 
-            if(index===-1){
+            if(index !==-1){
                 arrayBooks[index]={...arrayBooks[index],...bookActualizado};
                 await this.guardarArchivo(arrayBooks);
                 console.log("PRODUCTO ACTUALIZADO");
@@ -114,7 +114,7 @@ class BooksM {
         try{
             const arrayBooks =await this.leerArchivo();
             const index = arrayBooks.findIndex(i=>i.id===id);
-            if(index===-1){
+            if(index !==-1){
                 arrayBooks.splice(index,1);
                 await this.guardarArchivo(arrayBooks);
                 console.log("PRODUCTO ELIMINADO");
