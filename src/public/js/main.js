@@ -16,6 +16,7 @@ const renderProducts = (data) =>{
        <p>${item.price}</p>
        <p>${item.description}</p>
        <p>${item.category}</p>
+       <p>${item.ima}</p>
        <p>${item.stock}</p>
        <p>${item.id}</p>
        <button>Eliminar</button>
@@ -42,6 +43,7 @@ const agregarProduct = ()=>{
         price: document.getElementById("price").value,
         description: document.getElementById("description").value,
         category: document.getElementById("category").value,
+        img: document.getElementById("img").value,
         code: document.getElementById("code").value,
         stock: document.getElementById("stock").value,
         status: document.getElementById("status").value === "true",
