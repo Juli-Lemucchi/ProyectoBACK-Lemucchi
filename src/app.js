@@ -39,11 +39,11 @@ io.on("connection", async (socket) => {
 
     socket.on("eliminarProduct", async (id) => {
         await booksMa.deleteProduct(id);
-        io.socket.emit("products",await booksM.getProducts());
+        io.socket.emit("products",await booksMa.getProducts());
     })
     socket.on("agregarProduct", async (product) => {
         await booksMa.addProduct(product);
-        io.socket.emit("products",await booksM.getProducts());
+        io.socket.emit("products",await booksMa.getProducts());
     })
 })
 

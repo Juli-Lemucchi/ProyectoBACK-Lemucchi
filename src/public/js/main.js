@@ -5,7 +5,7 @@ socket.on("books", (data)=>{
     renderProducts(data)
 })
 
-const renderProducts = () =>{
+const renderProducts = (data) =>{
     const contenedorBooks = document.getElementById("contenedorBooks");
     contenedorBooks.innerHTML = "";
 
