@@ -8,10 +8,10 @@ class BooksM {
         this.path = path;
     }
 
-    async addProduct ({title, price, description, img, code, stock, category}){
+    async addProduct ({title, price, description, code, stock, category}){
         try{
             const arrayBooks =await this.leerArchivo();
-            if(!title || !price || !description || !img || !code || !stock || !category){
+            if(!title || !price || !description || !code || !stock || !category){
                 console.log("Todos los campos son obligatorios");
                 return;
             }
@@ -24,7 +24,6 @@ class BooksM {
                 title,
                 price,
                 description,
-                img,
                 code,
                 stock,
                 category,
