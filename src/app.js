@@ -5,6 +5,7 @@ import displayRoutes from "express-routemap";
 import bookRoutes from "./routes/book.router.js";
 import cartRoutes from "./routes/carts.router.js";
 import viewsRouter from "./routes/views.router.js";
+import "./database.js"
 
 const app = express();
 const PUERTO = 8080;
