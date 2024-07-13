@@ -1,14 +1,23 @@
 <h1>DinoBooks</h1>
 <h2>Nuestros libros disponibles</h2>
 
-<div class="contenedorBooks">
-    {{#each books}}
-    <div>
-        <h4>{{this.title}}</h4>
-        <p>{{this.description}}</p>
-        <p>{{this.price}}</p>
-        <p>{{this.category}}</p>
-        <p>{{this.img}}</p>
-    </div>
-    {{/each}}
+{{#each books}}
+<div>
+    <h2>{{title}}</h2>
+    <p> {{_id}} </p>
+    <p>{{description}}</p>
+    <p>Price: ${{price}}</p>
+    <p>Category: {{category}} </p>
+    <button> ++ </button>
 </div>
+{{/each}}
+
+
+{{#if hasNextPage}}
+    <a href="/books?page={{nextPage}}"> Siguiente </a>
+{{/if}} 
+{{#if hasPrevPage}}
+    <a href="/books?page={{prevPage}}"> Anterior </a>
+{{/if}}
+
+<p>Pagina {{currentPage}} de {{totalPages}} </p>

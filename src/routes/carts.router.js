@@ -1,23 +1,31 @@
 import express from "express";
-import CartsM from "../controllers/cartsM.js";
+import CartsModel from "../dao/model/cart.model.js";
+import CartsManager from "../dao/db/cart.manager-db.js";
 
 const router = express.Router();
-const cartsMa = new CartsM("./src/modules/carts.json");
+const cartsMa = new CartsManager();
 
 router.post("/", async (req, res) => {
     try {
-        const nuevoCarrito = await cartsMa.createCart();
+        const nuevoCarrito = await CartsManager.createCart();
         res.json(nuevoCarrito);
     } catch (error) {
         console.log("ERROR AL CREAR EL CARRITO");
         res.status(500).json({ error: "Error al crear el carrito" });
     }
 })
+
 router.get("/:cid", async (req, res) => {
     const cartId = parseInt(req.params.cid);
     try {
-        const cart = await cartsMa.getCartById(cartId);
-        res.json(carrito.books);
+        const carrito = await CartsModel.findById(cartId)
+            
+        if (!carrito) {
+            console.log("No existe ese carrito con el id");
+            return res.status(404).json({ error: "Carrito no encontrado" });
+        }
+
+        return res.json(carrito.books);
     } catch (error) {
         console.log("ERROR AL CARGAR EL CARRITO");
         res.status(500).json({ error: "Error al cargar el carrito" });

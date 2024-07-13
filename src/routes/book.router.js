@@ -1,26 +1,33 @@
 import express from "express";
-import BooksM from "../controllers/booksM.js";
+import BooksM from "../dao/db/books.manager-db.js";
 
-
+const booksMa = new BooksM();
 const router = express.Router();
-const booksMa = new BooksM("./src/modules/books.json");
+
 
 
 router.get("/", async (req, res) => {
     try {
-        const limit = req.query.limit;
-        const books = await booksMa.getProducts();
-
-        if(limit){
-            res.json(books.slice(0, limit));
-        }else{
-            res.json(books);
-        }
+        const { limit =10 , page = 1, query, sort} = req.query;
+        const books = await booksMa.getProducts({limit: parseInt(limit), page : parseInt(page), query, sort});
+        res.json({
+            status: 'success',
+            payload: books,
+            totalPages: books.totalPages,
+            prevPage: books.prevPage,
+            nextPage: books.nextPage,
+            page: books.page,
+            hasPrevPage: books.hasPrevPage,
+            hasNextPage: books.hasNextPage,
+            prevLink: books.hasPrevPage ? `/apibooks?limit=${limit}&page=${books.prevPage}&sort=${sort}&query=${query}` : null,
+            nextLink: books.hasNextPage ? `/apibooks?limit=${limit}&page=${books.nextPage}&sort=${sort}&query=${query}` : null,
+        })
     } catch (error) {
         console.log("ERROR AL CARGAR LOS PRODUCTOS");
         res.status(500).json({ error: "Error al cargar los productos" });
     }
 });
+
 router.get("/:id", async (req, res) => {
     const id = parseInt(req.params.id);
 
@@ -34,6 +41,7 @@ router.get("/:id", async (req, res) => {
     }
 
 });
+
 router.post("/", async (req, res) => {
     const nuevoBook = req.body;
     
@@ -44,6 +52,7 @@ router.post("/", async (req, res) => {
         res.status(500).json({ error: "Error al agregar el producto" });
     }
 });
+
 router.put("/:id", async (req, res) => {
     const id = parseInt(req.params.id);
     const bookActualizado = req.body;
@@ -55,6 +64,7 @@ router.put("/:id", async (req, res) => {
         res.status(500).json({error: "Error al actualizar el producto"})
     }
 });
+
 router.delete("/:id", async (req, res) => {
     const id = parseInt(req.params.id);
 

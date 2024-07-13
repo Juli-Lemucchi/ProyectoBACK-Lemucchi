@@ -1,11 +1,15 @@
 import express from "express";
-import { engine } from "express-handlebars";
+import exphbs  from "express-handlebars";
+import "./database.js"
+
 import { Server } from 'socket.io';
 import displayRoutes from "express-routemap";
+import BooksM from "./dao/fs/controllers/booksM.js";
+
 import bookRoutes from "./routes/book.router.js";
 import cartRoutes from "./routes/carts.router.js";
 import viewsRouter from "./routes/views.router.js";
-import "./database.js"
+
 
 const app = express();
 const PUERTO = 8080;
@@ -14,9 +18,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static("./src/public"));
 
-app.engine("handlebars", engine());
-app.set("views", "./src/views");
+app.engine("handlebars", exphbs.engine());
 app.set("view engine", "handlebars");
+app.set("views", "./src/views");
 
 app.use("/api/books", bookRoutes);
 app.use("/api/carts", cartRoutes);
@@ -28,9 +32,10 @@ const httpServer = app.listen(PUERTO, () =>{
     console.log("Server running on port: " + PUERTO)
 });
 
-import BooksM from "./controllers/booksM.js";
-const booksMa = new BooksM("./src/modules/books.json");
 
+
+
+const booksMa = new BooksM("./src/modules/books.json");
 const io = new Server(httpServer);
 
 io.on("connection", async (socket) => {

@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import mongoosePaginate from "mongoose-paginate-v2";
 
 
 const bookSchema = new mongoose.Schema({
@@ -12,6 +13,8 @@ const bookSchema = new mongoose.Schema({
     status:{type:Boolean, required:true},
     thumbnail:{type:[String]}
 });
+
+bookSchema.plugin(mongoosePaginate);
 
 const BooksModel = mongoose.model("books", bookSchema);
 

@@ -5,6 +5,10 @@ const cartSchema = new mongoose.Schema({
     quantity: {type:Number, required:true}
 });
 
+cartSchema.pre('findOne', function(next) {
+    this.populate('books.book', '_id title price');  
+    next();  
+})
 const CartsModel = mongoose.model("carts", cartSchema);
 
 export default CartsModel
