@@ -46,6 +46,16 @@ class CartsM{
             throw error;
         }
     }
+
+    async deleteCart(cartId){
+        try {
+            const carrito = await CartsModel.findByIdAndDelete(cartId);
+            return carrito;
+        } catch (error) {
+            console.error("ERROR AL ELIMINAR CARRITO");
+            throw error;
+        }
+    }
 }
 
 export default CartsM

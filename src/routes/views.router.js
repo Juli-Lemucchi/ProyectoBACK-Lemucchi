@@ -2,19 +2,15 @@ import express from "express";
 import BooksM from "../dao/db/books.manager-db.js";
 import CartsM from "../dao/db/cart.manager-db.js";
 
-const booksMa = new BooksM();
+const booksM = new BooksM();
 const cartsMa = new CartsM();
 const router = express.Router();
-
-router.get("/realtimeproducts", async (req, res) => {
-    res.render("realtimeproducts");
-})
 
 
 router.get("/books", async (req, res) => {
     try{
         const {page = 1, limit = 2} = req.query;
-        const books = await booksMa.getProducts({page: parseInt(page), limit: parseInt(limit)});
+        const books = await booksM.getProducts({page: parseInt(page), limit: parseInt(limit)});
 
         const nuevoArray = books.docs.map((book) => {
             const{_id,...rest}=book.toObject();

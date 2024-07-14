@@ -1,15 +1,15 @@
 import express from "express";
 import BooksM from "../dao/db/books.manager-db.js";
 
-const booksMa = new BooksM();
+const booksM = new BooksM();
 const router = express.Router();
 
 
 
 router.get("/", async (req, res) => {
     try {
-        const { limit =10 , page = 1, query, sort} = req.query;
-        const books = await booksMa.getProducts({limit: parseInt(limit), page : parseInt(page), query, sort});
+        const { limit =10, page = 1, query, sort} = req.query;
+        const books = await booksM.getProducts({limit: parseInt(limit), page : parseInt(page), query, sort});
         res.json({
             status: 'success',
             payload: books,
@@ -32,7 +32,7 @@ router.get("/:id", async (req, res) => {
     const id = parseInt(req.params.id);
 
     try {
-        const book = await booksMa.getProductById(id);
+        const book = await booksM.getProductById(id);
         if(!book){
             res.status(404).json({ error: "Producto no encontrado" });
         }
@@ -46,7 +46,7 @@ router.post("/", async (req, res) => {
     const nuevoBook = req.body;
     
     try{
-        await booksMa.addProduct(nuevoBook);
+        await booksM.addProduct(nuevoBook);
         res.status(201).json({ message: "Producto agregado" });
     }catch(error){
         res.status(500).json({ error: "Error al agregar el producto" });
@@ -58,7 +58,7 @@ router.put("/:id", async (req, res) => {
     const bookActualizado = req.body;
 
     try{
-        await booksMa.updateProduct(id,bookActualizado);
+        await booksM.updateProduct(id,bookActualizado);
         res.json({message: "Producto actualizado",})
     }catch(error){
         res.status(500).json({error: "Error al actualizar el producto"})
@@ -69,7 +69,7 @@ router.delete("/:id", async (req, res) => {
     const id = parseInt(req.params.id);
 
     try{
-        await booksMa.deleteProduct(id);
+        await booksM.deleteProduct(id);
         res.json({message: "Producto eliminado"});
     }catch(error){
         res.status(500).json({error: "Error al eliminar el producto"});

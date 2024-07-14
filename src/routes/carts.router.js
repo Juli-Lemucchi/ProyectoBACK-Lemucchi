@@ -45,4 +45,17 @@ router.post("/:cid/book/:id", async (req, res) => {
         res.status(500).json({ error: "Error al cargar el carrito" });
     }
 });
+
+router.delete("/:cid", async (req, res) => {
+    const cartId = parseInt(req.params.cid);
+    try {
+        await CartsModel.findByIdAndDelete(cartId);
+        res.json({ message: "Carrito eliminado" });
+    } catch (error) {
+        console.log("ERROR AL CARGAR EL CARRITO");
+        res.status(500).json({ error: "Error al cargar el carrito" });
+    }   
+})
+
+
 export default router
