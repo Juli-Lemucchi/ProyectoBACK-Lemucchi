@@ -34,7 +34,7 @@ class BooksM {
             throw error;
         }
     }
-    async getProducts(){
+    async getProducts(page, limit, query, sort){
         try{
             const skip = (page - 1)* limit;
             let queryOptions = {};
