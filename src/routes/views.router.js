@@ -21,7 +21,7 @@ router.get("/books", async (req, res) => {
             return {...rest}
         })
 
-        res.render(books,{
+        res.render("home",{
             books: nuevoArray,
             hasPrevPage: books.hasPrevPage,
             hasNextPage: books.hasNextPage,
@@ -36,7 +36,7 @@ router.get("/books", async (req, res) => {
     }
 })
 
-router.get("/carts", async (req, res) => {
+router.get("/carts/:cid", async (req, res) => {
     const cartId = parseInt(req.params.cid);
     try{
         const cart = await cartsMa.getCartById(cartId);

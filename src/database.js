@@ -1,6 +1,8 @@
 import mongoose from "mongoose";
+import doenv from "dotenv";
+doenv.config();
 
 
-mongoose.connect("mongodb+srv://Juli-Lemucchi:JNLmucchi13@dinobooks.90v1a4z.mongodb.net/ecommerce")
+mongoose.connect(process.env.DB_URL)
     .then(() => {console.log("Conectado a la base de datos");})
     .catch((error) => {console.log(error);})
