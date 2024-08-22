@@ -1,5 +1,10 @@
 <h1>DinoBooks</h1>
+<h2>Bienvenido {{name}}</h2>
 <h2>Nuestros libros disponibles</h2>
+
+<form action="/api/sessions/logout" method="POST">
+    <button type="submit">logout</button>
+</form>
 
 {{#each books}}
 <div>

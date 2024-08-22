@@ -54,5 +54,10 @@ router.get("/carts/:cid", async (req, res) => {
         res.status(500).json({ error: "Error al cargar el carrito" });
     }
 });
-
+router.get("/login", (req, res) => {
+    res.render("login");
+})
+router.get("/rgister", (req, res) => {
+    res.render("register");
+})
 export default router
