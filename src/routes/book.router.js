@@ -29,7 +29,7 @@ router.get("/", async (req, res) => {
 });
 
 router.get("/:id", async (req, res) => {
-    const id = parseInt(req.params.id);
+    const id =req.params.id;
 
     try {
         const book = await booksM.getProductById(id);
@@ -54,7 +54,7 @@ router.post("/", async (req, res) => {
 });
 
 router.put("/:id", async (req, res) => {
-    const id = parseInt(req.params.id);
+    const id = req.params.id;
     const bookActualizado = req.body;
 
     try{
@@ -66,7 +66,7 @@ router.put("/:id", async (req, res) => {
 });
 
 router.delete("/:id", async (req, res) => {
-    const id = parseInt(req.params.id);
+    const id = req.params.id;
 
     try{
         await booksM.deleteProduct(id);

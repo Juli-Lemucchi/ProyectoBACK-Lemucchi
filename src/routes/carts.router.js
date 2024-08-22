@@ -35,7 +35,7 @@ router.post("/", async (req, res) => {
 })
 
 router.get("/:cid", async (req, res) => {
-    const cartId = parseInt(req.params.cid);
+    const cartId = req.params.cid;
     try {
         const carrito = await CartsModel.findById(cartId)
             
@@ -95,7 +95,7 @@ router.post("/:cid/book/:bid", async (req, res) => {
 });
 
 router.delete("/:cid", async (req, res) => {
-    const cartId = parseInt(req.params.cid);
+    const cartId =req.params.cid;
     try {
         await CartsModel.findByIdAndDelete(cartId);
         res.json({ message: "Carrito eliminado" });
