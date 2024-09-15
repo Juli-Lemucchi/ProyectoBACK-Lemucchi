@@ -1,5 +1,7 @@
 import UserRepository from "../dao/repositories/user.repository.js";
 import { createHash, isValidPassword } from "../util/util.js";
+import cartRepository from "../repositories/cart.repository.js";
+
 
 
 class UserService {
@@ -8,6 +10,9 @@ class UserService {
         if (existUser) {
             throw new Error("El usuario ya existe");
         }
+        const cart = await cartRepository.createRepo();
+        userData.cart = cart._id;
+
         userData.password = createHash(userData.password);
         return await UserRepository.createUser(userData);
     }
