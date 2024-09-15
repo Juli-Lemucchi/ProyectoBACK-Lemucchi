@@ -1,17 +1,21 @@
 import express from "express";
 import BooksM from "../dao/db/books.manager-db.js";
 import CartsM from "../dao/db/cart.manager-db.js";
+import { soloAdmin, soloUser } from "../middleware/auth.js";
+import passport from "passport";
+
 
 const booksMa = new BooksM();
 const cartsMa = new CartsM();
 const router = express.Router();
+router.use();
+
 
 router.get("/home", async (req, res) => {
     res.render("home");
 })
 
-
-router.get("/books", async (req, res) => {
+router.get("/books",passport.authenticate("jwt", { session: false }), soloUser, async (req, res) => {
     try{
         const {page = 1, limit = 2} = req.query;
         const books = await booksMa.getProducts({page: parseInt(page), limit: parseInt(limit)});
@@ -21,7 +25,7 @@ router.get("/books", async (req, res) => {
             return {...rest}
         })
 
-        res.render("home",{
+        res.render("books",{
             books: nuevoArray,
             hasPrevPage: books.hasPrevPage,
             hasNextPage: books.hasNextPage,
@@ -60,4 +64,6 @@ router.get("/login", (req, res) => {
 router.get("/rgister", (req, res) => {
     res.render("register");
 })
+router.get("/realtimeproducts", passport.authenticate("jwt", { session: false }),soloAdmin, (req, res) => {
+    res.render("realTimeProducts");})
 export default router

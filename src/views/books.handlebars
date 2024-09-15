@@ -1,0 +1,27 @@
+<h2>Bienvenido {{name}}</h2>
+<h2>Nuestros libros disponibles</h2>
+
+<form action="/api/sessions/logout" method="POST">
+    <button type="submit">logout</button>
+</form>
+
+{{#each books}}
+<div>
+    <h2>{{title}}</h2>
+    <p> {{_id}} </p>
+    <p>{{description}}</p>
+    <p>Price: ${{price}}</p>
+    <p>Category: {{category}} </p>
+    <button> ++ </button>
+</div>
+{{/each}}
+
+
+{{#if hasNextPage}}
+    <a href="/books?page={{nextPage}}"> Sig </a>
+{{/if}} 
+{{#if hasPrevPage}}
+    <a href="/books?page={{prevPage}}"> Ant </a>
+{{/if}}
+
+<p>Pagina {{currentPage}} de {{totalPages}} </p>
