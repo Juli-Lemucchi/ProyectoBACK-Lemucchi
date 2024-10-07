@@ -1,5 +1,5 @@
-import UserRepository from "../dao/repositories/user.repository.js";
-import { createHash, isValidPassword } from "../util/util.js";
+import UserRepository from "../repositories/user.repository.js";
+import { createHash, isValidPassword } from "../utils/util.js";
 import cartRepository from "../repositories/cart.repository.js";
 
 

@@ -4,7 +4,7 @@ import CartsManager from "../dao/db/cart.manager-db.js";
 import BooksModel from "../dao/model/books.model.js";
 import UserModel from "../dao/model/user.model.js";
 import TicketModel from "../dao/model/tickets.model.js";
-import { calcuTotal } from "../util/util.js";
+import { calcuTotal } from "../utils/util.js";
 
 const router = express.Router();
 const cartsMa = new CartsManager();
