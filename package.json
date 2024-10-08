@@ -1,7 +1,6 @@
 {
   "name": "proyectoback-lemucchi",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "type": "module",
   "scripts": {
@@ -23,5 +22,7 @@
     "passport": "^0.7.0",
     "passport-jwt": "^4.0.1",
     "socket.io": "^4.7.5"
-  }
+  },
+  "devDependencies": {},
+  "description": ""
 }

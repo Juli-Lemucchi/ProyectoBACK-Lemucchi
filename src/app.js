@@ -1,14 +1,13 @@
 import express from "express";
 import exphbs  from "express-handlebars";
+import passport from "passport";
+import cookieParser from "cookie-parser";
+import inicialicePassport from "./config/passport.config.js";
 import "./database.js"
 
 import { Server } from 'socket.io';
 import displayRoutes from "express-routemap";
 import BooksM from "./dao/fs/controllers/booksM.js";
-import passport from "passport";
-import inicialicePassport from "./config/passport.config.js";
-import cookieParser from "cookie-parser";
-
 import bookRoutes from "./routes/book.router.js";
 import cartRoutes from "./routes/carts.router.js";
 import viewsRouter from "./routes/views.router.js";

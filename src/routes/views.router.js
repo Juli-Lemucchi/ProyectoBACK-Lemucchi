@@ -8,7 +8,6 @@ import passport from "passport";
 const booksMa = new BooksM();
 const cartsMa = new CartsM();
 const router = express.Router();
-router.use();
 
 
 router.get("/home", async (req, res) => {
@@ -66,4 +65,6 @@ router.get("/rgister", (req, res) => {
 })
 router.get("/realtimeproducts", passport.authenticate("jwt", { session: false }),soloAdmin, (req, res) => {
     res.render("realTimeProducts");})
+
+    
 export default router

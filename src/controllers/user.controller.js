@@ -49,3 +49,5 @@ class UserController {
         res.redirect("/login")
     }
 }
+
+export default new UserController();
